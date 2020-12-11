@@ -44,7 +44,7 @@ def find_point(point,new_1,new_2,new_3,count):
         new_3[1] += point[1]
         count[2] += 1
 #kmeans
-def show(point_num):
+def show(point_num,result_img):
     result_1 = torch.zeros(1,3)
     result_2 = torch.zeros(1,3)
     result_3 = torch.zeros(1,3)
@@ -66,9 +66,12 @@ def show(point_num):
     plt.plot(result_1[:,0],result_1[:,1],'.',color = 'r')
     plt.plot(result_2[:,0],result_2[:,1],'.',color = 'g')
     plt.plot(result_3[:,0],result_3[:,1],'.',color = 'b')
+    plt.savefig('result/ire_{}'.format(result_img))
     plt.show()
 
 def kmeans(k,data,ire):
+    #save result
+    result_img = 0
     #class num
     cls_num = torch.linspace(1,k,k)
     #point ire times
@@ -94,7 +97,8 @@ def kmeans(k,data,ire):
         cls_1 = new_1/count[0]
         cls_2 = new_2/count[1]
         cls_3 = new_3/count[2]
-        show(point_num)
+        show(point_num,result_img)
+        result_img += 1
 #use kmeans
 kmeans(3,point,10)
 
